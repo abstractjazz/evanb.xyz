@@ -1,43 +1,82 @@
+"use client";
+
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
 export default function Contact() {
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Netlify expects URL-encoded body
+    const body = new URLSearchParams(formData as any).toString();
+
+    try {
+      await fetch('/__forms.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      });
+
+      // Optional: reset the form
+      form.reset();
+
+      // Redirect to your thank-you page
+      router.push('/thanks');
+      // or: window.location.href = '/thanks';
+    } catch (err) {
+      console.error('Form submission error:', err);
+      // TODO: show an error message to the user
+    }
+  };
+
   return (
-    
-    <div id="contact"className="bg-black" >
+    <div id="contact" className="bg-black">
       <div className="mx-auto max-w-7xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8" id="contact-1">
         <div className="relative bg-black shadow-xl">
-          {/* <h1 className="sr-only">Contact us</h1> */}
-
           <div className="grid grid-cols-1 lg:grid-cols-3">
             {/* Contact information */}
             <div className="relative overflow-hidden bg-black py-10 px-6 sm:px-10 xl:p-12 text-beige">
-             
               <h3 className="text-3xl font-articulat-cf text-beige">Get in touch.</h3>
-             
-              <Link href="https://calendly.com/ev-b/intro-consultation" rel="noopener noreferrer" target="_blank"><p className="text-xl mb-4 mt-4 text-goldenrod underline font-bold">Grab a time to chat on my calendar here. </p></Link>
-              <ul key ="contactInfo-2">
+
+              <Link
+                href="https://calendly.com/ev-b/intro-consultation"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <p className="text-xl mb-4 mt-4 text-goldenrod underline font-bold">
+                  Grab a time to chat on my calendar here.
+                </p>
+              </Link>
+
+              <ul key="contactInfo-2">
                 <p className="mb-4 mt-4">Based in Baltimore MD</p>
-              <li className="flex space-x-3" key="phone-2">
-              <EnvelopeIcon className="h-5 w-5" ></EnvelopeIcon>
-              <span>hello@evanb.xyz</span>
-              </li>
-
-  
-              <li className="flex space-x-3" key="envelope-2">
-              <PhoneIcon className="h-5 w-5"/>
-               <span>+1 415-304-2530</span>
-
-               </li>
-               </ul>
-             
-              
+                <li className="flex space-x-3" key="phone-2">
+                  <EnvelopeIcon className="h-5 w-5" />
+                  <span>evan@heyevan.com</span>
+                </li>
+                <li className="flex space-x-3" key="envelope-2">
+                  <PhoneIcon className="h-5 w-5" />
+                  <span>+1 415-304-2530</span>
+                </li>
+              </ul>
             </div>
 
             {/* Contact form */}
             <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-              <h3 className="text-lg font-medium text-gray-900"></h3>
-              <form name="contact" className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" action={"/success"} method="POST" data-netlify="true">
-              <input type="hidden" name="form-name" value="contact" />
+              <form
+                name="contact"
+                className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
+                onSubmit={handleSubmit}
+              >
+                {/* IMPORTANT: keep this hidden field to match the static form */}
+                <input type="hidden" name="form-name" value="contact" />
+
                 <div>
                   <label htmlFor="first-name" className="block text-sm font-medium text-gray-100">
                     First name
@@ -52,6 +91,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="last-name" className="block text-sm font-medium text-gray-100">
                     Last name
@@ -66,6 +106,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-100">
                     Email
@@ -80,6 +121,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <div className="flex justify-between">
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-100">
@@ -100,6 +142,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2">
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-100">
                     Subject
@@ -113,6 +156,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2">
                   <div className="flex justify-between">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-100">
@@ -133,6 +177,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2 sm:flex sm:justify-end">
                   <button
                     type="submit"
@@ -147,5 +192,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  )
+  );
 }
