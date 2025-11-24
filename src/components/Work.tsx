@@ -11,7 +11,7 @@ export default function Work() {
 
         <div className="font-articulat-cf font-bold text-base md:text-2xl text-beige mt-4 md:mt-8 md:ml-0 md:mr-6">
           I&apos;m happy to share past projects and professional references directly. <br></br><br></br>Reach out{" "}
-          <Link href="/contact" className="text-goldenrod underline">
+          <Link href="/#contact" className="text-goldenrod underline">
             here
           </Link>
           .
