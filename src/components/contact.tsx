@@ -17,7 +17,7 @@ export default function Contact() {
     const body = new URLSearchParams(formData as any).toString();
 
     try {
-      await fetch('/__forms.html', {
+      await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body,
@@ -42,7 +42,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-3">
             {/* Contact information */}
             <div className="relative overflow-hidden bg-black py-10 px-6 sm:px-10 xl:p-12 text-beige">
-              <h3 className="text-3xl font-articulat-cf text-beige">Get in touch.</h3>
+              <h3 className="text-3xl font-articulat-cf text-beige">Hello.</h3>
 
               <Link
                 href="https://calendly.com/ev-b/intro-consultation"
@@ -50,7 +50,7 @@ export default function Contact() {
                 target="_blank"
               >
                 <p className="text-xl mb-4 mt-4 text-goldenrod underline font-bold">
-                  Grab a time to chat on my calendar here.
+                  Grab a time to chat on my calendar.
                 </p>
               </Link>
 
@@ -65,10 +65,12 @@ export default function Contact() {
                   <span>+1 415-304-2530</span>
                 </li>
               </ul>
+            
             </div>
 
             {/* Contact form */}
             <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+                <p className="text-sm font-arcticulat-cf text-gray-500">Have a quick question? Drop me a line.</p>
               <form
                 name="contact"
                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"

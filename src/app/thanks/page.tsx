@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function Thanks() {  
   return (
@@ -6,6 +7,7 @@ export default function Thanks() {
         <h1 className="text-4xl font-miller-banner font-black italic text-beige mb-6">
           Thanks for reaching out. We'll be in touch soon.
         </h1> 
+       <Link href="/#home"><p className="text-xs text-gray-500 underline cursor-pointer">[Home]</p></Link>
     </div>
     </div>
   );

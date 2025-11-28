@@ -19,7 +19,7 @@ export default function Work() {
       </div>
 
       {/* Image column (left on desktop, bottom on mobile) */}
-      <div className="w-full md:w-1/2 px-6 md:mt-0 md:ml-16 md:mr-16 mb-16">
+      <div className="w-full md:w-1/2 px-6 md:mt-30 md:ml-16 md:mr-16 mb-16">
         <img
           src="/mail.gif"
           alt="Under Construction"
